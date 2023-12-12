@@ -3,6 +3,7 @@ struct Rectangle {
     widthe: u32,
 }
 
+// implを使用すると構造体やトレイトに関する機能をまとめて管理できる
 impl Rectangle {
     // 以下のnewのように&selfを引数としないようなものを関連関数という
     fn new(h: u32, w: u32) -> Rectangle {
