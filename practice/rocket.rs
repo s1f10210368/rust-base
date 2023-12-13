@@ -13,3 +13,5 @@ fn rocket() -> _ {
     .mount("/", routes![index])
     .mount("/test", routes![index])
 }
+
+// http://127.0.0.1:8000/hello で動く
