@@ -37,3 +37,19 @@ fn main() {
     println!("Point-X:{}", point.v_axis());
     println!("Point-X:{}", point.h_axis());
 }
+
+
+// -------- 上記を関連型に変更すると以下のようになる ------
+
+trait Position {
+    type X;
+    type Y;
+
+    fn exist(&self, _: &Self::X, _: &Self::Y) -> bool;
+    fn h_axis(&self) -> i32;
+    fn v_axis(&self) -> i32;
+}
+
+fn new_point<Z: Position>(point: &Z) {
+    println!("POINT:({},{})", point.v_axis(), point.h_axis())
+}
