@@ -1,23 +1,39 @@
-use hyper::service::{make_service_fn, service_fn};
-use hyper::{Body, Request, Response, Server};
-use std::convert::Infallible;
-use std::net::SocketAddr;
+// 32 bit の整数型の要素を２つもつ構造体
+struct Point(i32, i32);
 
-async fn hello_hyper(req: Request<Body>) -> Result<Response<Body>, Infallible> {
-    Ok(Response::new("Hello, hyper".into()))
+// Point の座標があっているかどうかを確認するトレイト
+trait Position<X, Y> {
+    fn exist(&self, _: &X, _: &Y) -> bool;
+    fn h_axis(&self) -> i32;
+    fn v_axis(&self) -> i32;
 }
 
-#[tokio::main]
-async fn main() {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
-
-    let make_svc = make_service_fn(|_conn| async {
-        Ok::<_, Infallible>(service_fn(hello_hyper))
-    });
-
-    let server = Server::bind(&addr).serve(make_svc);
-
-    if let Err(e) = server.await {
-        eprintln!("server error: {}", e);
+impl Position<i32, i32> for Point {
+    // ２つの要素が正しいことを確認
+    fn exist(&self, x: &i32, y: &i32) -> bool {
+        (&self.0 == x) && (&self.1 == y)
     }
+
+    // x座標を取得
+    fn h_axis(&self) -> i32 {
+        self.0
+    }
+
+    // y座標を取得
+    fn v_axis(&self) -> i32 {
+        self.1
+    }
+}
+
+fn main() {
+    let x = 5;
+    let y = 10;
+
+    let point = Point(x, y);
+
+    println!("Point X:{}, Y:{}", &x, &y);
+    println!("Exist?:{}", point.exist(&x, &y));
+
+    println!("Point-X:{}", point.v_axis());
+    println!("Point-X:{}", point.h_axis());
 }

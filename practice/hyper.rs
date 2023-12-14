@@ -1,3 +1,6 @@
+// hyperは非同期処理クレートと呼ばれるもの
+// 
+
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Request, Response, Server};
 use std::convert::Infallible;
