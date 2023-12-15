@@ -53,3 +53,10 @@ trait Position {
 fn new_point<Z: Position>(point: &Z) {
     println!("POINT:({},{})", point.v_axis(), point.h_axis())
 }
+
+/*
+関連型
+「トレイト」 : 「実装対象の型 (Self)」 = 1 : 1
+ジェネリクス
+「トレイト」 : 「実装対象の型 (Self)」 = N : 1
+*/
