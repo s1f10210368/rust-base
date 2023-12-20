@@ -71,6 +71,8 @@ std::convert; // <-- 型を変換するために使用するトレイト
 std::convert::Into; // <-- 現在のクレートの外側の型への値から値への変換
 std::convert::From; // <-- 値から値への変換
 
+// ------------------------------------------------------------------
+
 // Fromトレイト
 // ある型に対して別の型からその型を作る方法を定義するようにするものです。
 pub trait From<T> {
@@ -100,3 +102,23 @@ impl From<変換元> for 変換先 {
     }
 }
 */
+
+// ---------------------------------------------
+
+// Intoトレイト
+// intoトレイトはFromトレイトとは逆の関係になっている
+pub trait Into<T> {
+    fn into(self) -> T;
+}
+
+// 自作の型に From トレイトが実装されている場合、Into は必要に応じてそれを呼び出す
+
+struct Number {
+    value: i32,
+}
+
+impl From<i32> for Number {
+    fn from(item: i32) -> Self {
+        Number { value: item }
+    }
+}
