@@ -15,4 +15,4 @@ let my_pet = ANIMAL::DOG;
 enum Shape {
     Line {x1: i32, y1: i32, x2: i32, y2: i32},
     Circle {x: i32, y: i32, r: i32},
- }
+}
