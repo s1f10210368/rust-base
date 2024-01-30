@@ -8,3 +8,5 @@ fn print_message(msg: String) -> String {
 fn test_message() {
     assert_eq!("Hello", print_message("Hello".to_string()));
 }
+
+//特定のものだけ実行したい場合は関数名を cargo test --- と入力
