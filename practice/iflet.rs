@@ -22,4 +22,4 @@ if let Some(i) = optional {
 
 // 以下はlet-elseを用いる方法
 
-let パターン = 値 else { never型を返す処理 };
+// let パターン = 値 else { never型を返す処理 };
