@@ -1,42 +1,8 @@
-fn add(a: i32, b: i32) -> i32 {
-    a + b
+fn main() {
+    let x = 3.1415;
+    let r = 8.0;
+    println!("半径:{} の円の面積は {}",r , x * r * r);
 }
 
-fn sub(a: i32, b: i32) -> i32 {
-    a - b
-}
-
-#[test]
-fn should_added_number_when_two_numbers() {
-    assert_eq!(9, add(3, 6))
-}
-
-#[test]
-fn should_subtracted_number_when_two_numbers() {
-    assert_eq!(3, sub(6, 3))
-}
-
-// rust ではテストコードをひとまとめにすることができる
-
-fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-fn sub(a: i32, b: i32) -> i32 {
-    a - b
-}
-
-#[cfg(test)]  // cargo test でだけ動くようになっている
-mod tests {
-    use super::*;
-    
-    #[test]
-    fn should_added_number_when_two_numbers() {
-        assert_eq!(9, add(3, 6))
-    }
-
-    #[test]
-    fn should_subtracted_number_when_two_numbers() {
-        assert_eq!(3, sub(6, 3))
-    }
-}
+// cilppy はrustのLintツール
+// プログラムを添削して修正余地があれば修正方法を提示してくれるようなもの
