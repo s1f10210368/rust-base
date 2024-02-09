@@ -1,15 +1,10 @@
-// cargo fmt 前
-fn main(){
-    for n in 0..10{
-    println!("{n}: Hello, Rust!");
-    }
-    }
+// 乱数生成
 
-// cargo fmt後
-fn main(){
-    for n in 0..10{
-    println!("{n}: Hello, Rust!");
-    }
+use rand::Rng; // Rngトレイトを導入
+
+fn main() {
+    let mut rng = rand::thread_rng();
+    let x: i32 = rng.gen(); // 乱数を生成
+    println!("{}", x);
 }
 
-// 上記のように修正してくれるツール、習慣づけたい
