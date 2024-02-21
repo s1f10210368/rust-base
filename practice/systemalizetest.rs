@@ -46,6 +46,7 @@ assert!(x);	x が ture ならば正常、異なればパニック
 assert_eq!(x, y);	x == y ならば正常、異なればパニック
 assert_ne!(x, y);	x != y ならば正常、異なればパニック
 */
+
 use day_55_test;
 #[test]
 fn integration_test() {
