@@ -1,9 +1,9 @@
-use std::io;
 use rand::Rng;
+use std::io;
 use std::collections::HashSet;
 
-const SIZE: usize = 10; // ゲームボードのサイズ
-const MINES: usize = 10; // 地雷の数
+const SIZE: usize = 10;
+const MINES: usize = 10;
 
 #[derive(Clone, Copy)]
 enum Cell {
@@ -30,7 +30,6 @@ impl Game {
             state: [[State::Closed; SIZE]; SIZE],
         };
 
-        // 地雷をランダムに配置
         let mut rng = rand::thread_rng();
         let mut mines_placed = 0;
         while mines_placed < MINES {
@@ -42,7 +41,6 @@ impl Game {
             }
         }
 
-        // 各セルの隣接地雷数を計算
         for x in 0..SIZE {
             for y in 0..SIZE {
                 game.board[x][y] = match game.board[x][y] {
@@ -70,10 +68,69 @@ impl Game {
         game
     }
 
-    // ゲームの状態を表示するメソッドなど、追加の機能をここに実装
+    fn print(&self) {
+        for x in 0..SIZE {
+            for y in 0..SIZE {
+                match self.state[x][y] {
+                    State::Closed => print!("■ "),
+                    State::Open => match self.board[x][y] {
+                        Cell::Mine => print!("* "),
+                        Cell::Number(n) => print!("{} ", n),
+                        Cell::Empty => print!(". "),
+                    },
+                }
+            }
+            println!("");
+        }
+    }
+
+    fn open(&mut self, x: usize, y: usize) -> bool {
+        match self.board[x][y] {
+            Cell::Mine => false,
+            _ => {
+                self.state[x][y] = State::Open;
+                true
+            },
+        }
+    }
+
+    fn check_win(&self) -> bool {
+        for x in 0..SIZE {
+            for y in 0..SIZE {
+                match self.board[x][y] {
+                    Cell::Mine => continue,
+                    _ => if self.state[x][y] == State::Closed { return false; },
+                }
+            }
+        }
+        true
+    }
 }
 
 fn main() {
-    let game = Game::new();
-    // ゲームループ、ユーザー入力の処理、ゲーム状態の表示などをここに実装
+    let mut game = Game::new();
+    loop {
+        game.print();
+        println!("Enter X and Y coordinates to open a cell (e.g., 3 4): ");
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).unwrap();
+        let parts: Vec<&str> = input.trim().split_whitespace().collect();
+        if parts.len() != 2 {
+            println!("Invalid input. Please enter two numbers.");
+            continue;
+        }
+        let x: usize = parts[0].parse().expect("Invalid input. Please enter a number.");
+        let y: usize = parts[1].parse().expect("Invalid input. Please enter a number.");
+
+        if !game.open(x, y) {
+            println!("Boom! Game over.");
+            break;
+        }
+
+        if game.check_win() {
+            println!("Congratulations, you win!");
+            break;
+        }
+    }
 }
+
