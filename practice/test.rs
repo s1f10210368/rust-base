@@ -8,6 +8,6 @@ fn integration_test() {
 fn test_add() {
     assert!(add(1, 2) ==  3);       // 正常（ 1 + 2 == 3 -> true ）
     assert_eq!(add(1, 2), 3);       // 正常（ 1 + 2 == 3 ）
-    assert_ne!(add(1, 2), 4);       // 正常（ 1 + 2 != 4 ）
-    assert_eq!(add(1, 2), 1);       // エラー（ 1 + 2 == 1 ）
+    assert_ne!(add(1, 2), 4);      
+    assert_eq!(add(1, 2), 1);       
 }
