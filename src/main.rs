@@ -85,6 +85,10 @@ impl Game {
     }
 
     fn open(&mut self, x: usize, y: usize) -> bool {
+        if x >= SIZE || y >= SIZE {
+            return false; // 追加: 範囲外の座標に対するエラーチェック
+        }
+
         match self.board[x][y] {
             Cell::Mine => false,
             _ => {
@@ -113,24 +117,20 @@ fn main() {
         game.print();
         println!("Enter X and Y coordinates to open a cell (e.g., 3 4): ");
         let mut input = String::new();
-        io::stdin().read_line(&mut input).unwrap();
+        io::stdin().read_line(&mut input).expect("Failed to read line");
         let parts: Vec<&str> = input.trim().split_whitespace().collect();
         if parts.len() != 2 {
             println!("Invalid input. Please enter two numbers.");
             continue;
         }
-        let x: usize = parts[0].parse().expect("Invalid input. Please enter a number.");
-        let y: usize = parts[1].parse().expect("Invalid input. Please enter a number.");
-
-        if !game.open(x, y) {
-            println!("Boom! Game over.");
-            break;
-        }
-
-        if game.check_win() {
-            println!("Congratulations, you win!");
-            break;
-        }
-    }
-}
+        let x: usize = match parts[0].parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input. Please enter a number.");
+                continue;
+            },
+        };
+        let y: usize = match parts[1].parse() {
+            Ok(num
+            )}
 
