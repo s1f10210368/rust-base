@@ -133,4 +133,6 @@ fn main() {
         let y: usize = match parts[1].parse() {
             Ok(num
             )}
+        }
+    }
 
