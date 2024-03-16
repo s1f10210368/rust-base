@@ -31,7 +31,6 @@ fn generate_maze(width: usize, height: usize) -> Vec<Vec<char>> {
             }
         }
     }
-
     maze
 }
 
