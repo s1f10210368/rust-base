@@ -87,7 +87,7 @@ function main(lines: string[]) {
     }
   }
   
-  function readFromStdin(): Promise<string[]> {
+function readFromStdin(): Promise<string[]> {
     return new Promise(resolve => {
       let data: string = "";
       process.stdin.resume();
@@ -99,6 +99,6 @@ function main(lines: string[]) {
         resolve(data.split("\n").filter(line => line.trim())); // 空行を除外
       });
     })
-  }
+}
   
   
