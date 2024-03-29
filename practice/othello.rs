@@ -91,7 +91,6 @@ fn main() {
     let mut board = Board::new();
     board.print();
 
-    // 例として(5, 4)に黒を置く
     if board.place_stone(5, 4, Cell::Black) {
         println!("Placed a stone at (5, 4)");
     } else {
